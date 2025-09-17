@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Apex Sims</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+
+        html,
+        body {
+            margin: 0px;
+            padding: 0px;
+            min-width: 1140px;
+            background: whitesmoke;
+        }
+
+        #title {
+            margin: 0px;
+            font-size: 10vh;
+            font-family: "Zen Dots", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            text-align: center;
+            padding-top: 1vh;
+            color: whitesmoke;
+        }
+
+        #header {
+            margin-bottom: 0.5%;
+            width: 100%;
+            height: 10vh;
+            padding-bottom: 4vh;
+            background: #2A7B9B;
+            background: linear-gradient(160deg, rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
+        }
+
+        #bay1,
+        #bay3 {
+            float: left;
+        }
+
+        #bay2,
+        #bay4 {
+            float: right;
+        }
+
+        .controlpannel {
+            position: relative;
+            height: 40vh;
+            width: 48.5%;
+            margin: 0.5%;
+            background-color: rgb(144, 168, 174);
+            border: 0.125em solid rgb(122, 142, 147);
+            border-radius: 0.9375em;
+        }
+
+        .baynumber {
+            float: left;
+            margin: 0;
+            font-size: 30vh;
+            position: absolute;
+            top: 50%; left: 15%;
+            transform: translate(-50%,-50%);
+            font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            opacity: 25%;
+        }
+
+        .timer {
+            float: left;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%,-50%);
+            width: 30vh;
+            height: 30vh;
+            border: 1vh solid transparent;
+            border-radius: 50%;
+            background: linear-gradient(rgb(122, 142, 147), rgb(122, 142, 147)) content-box no-repeat,
+                conic-gradient(transparent 100%, 0, green) border-box;
+            text-align: center;
+        }
+
+        .time {
+            position: absolute;
+            top: 40%; left: 50%;
+            transform: translate(-50%,-50%);
+            font-size: 3vh;
+            color: #3B3B3B;
+        }
+
+        .buttonbox {
+            float: right;
+            width: 25%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1vh;
+            padding: 1vh;
+        }
+
+        .buttonbox button {
+            padding: 3.25vh 15px;
+            background-color: rgb(90, 104, 108);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 2vh;
+            transition: background-color 0.3s;
+            flex: 1 1 200px;
+        }
+
+        .buttonbox button:hover {
+            background-color: #22272c;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header">
+        <h1 id="title">APEX SIMS</h1>
+    </div>
+
+
+    <div class="controlpannel" id="bay1">
+        <h2 class="baynumber">1</h2>
+
+        <div class="timer" id="timer1">
+            <h3 class="time" id="time1">Time Over</h3>
+        </div>
+
+        <div class="buttonbox">
+            <button id="button11" onclick="control(1, 1800)">Start 30 Min</button>
+            <button id="button12" onclick="control(1, 3600)">Start 60 Min</button>
+            <button id="button13" onclick="control(1, 0)">End Time</button>
+            <button id="button14" onclick="secondMenu(1, 'button11', 'button12', 'button13', 'button14')">More</button>
+        </div>
+    </div>
+
+    <div class="controlpannel" id="bay2">
+        <h2 class="baynumber">2</h2>
+
+        <div class="timer" id="timer2">
+            <h3 class="time" id="time2">Time Over</h3>
+        </div>
+
+        <div class="buttonbox">
+            <button id="button21" onclick="control(2, 1800)">Start 30 Min</button>
+            <button id="button22" onclick="control(2, 3600)">Start 60 Min</button>
+            <button id="button23" onclick="control(2, 0)">End Time</button>
+            <button id="button24" onclick="secondMenu(2, 'button21', 'button22', 'button23', 'button24')">More</button>
+        </div>
+    </div>
+
+    <div class="controlpannel" id="bay3">
+        <h2 class="baynumber">3</h2>
+
+        <div class="timer" id="timer3">
+            <h3 class="time" id="time3">Time Over</h3>
+        </div>
+
+        <div class="buttonbox">
+            <button id="button31" onclick="control(3, 1800)">Start 30 Min</button>
+            <button id="button32" onclick="control(3, 3600)">Start 60 Min</button>
+            <button id="button33" onclick="control(3, 0)">End Time</button>
+            <button id="button34" onclick="secondMenu(3, 'button31', 'button32', 'button33', 'button34')">More</button>
+        </div>
+    </div>
+
+    <div class="controlpannel" id="bay4">
+        <h2 class="baynumber">4</h2>
+
+        <div class="timer" id="timer4">
+            <h3 class="time" id="time4">Time Over</h3>
+        </div>
+
+        <div class="buttonbox">
+            <button id="button41" onclick="control(4, 1800)">Start 30 Min</button>
+            <button id="button42" onclick="control(4, 3600)">Start 60 Min</button>
+            <button id="button43" onclick="control(4, 0)">End Time</button>
+            <button id="button44" onclick="secondMenu(4, 'button41', 'button42', 'button43', 'button44')">More</button>
+        </div>
+    </div>
+
+    <script>
+
+        const firstMenu = (bay, button1, button2, button3, button4) => {
+
+            document.getElementById(button1).outerHTML = `<button id="${button1}" onclick="control(${bay}, 1800)">Start 30 Min</button>`;
+            document.getElementById(button2).outerHTML = `<button id="${button2}" onclick="control(${bay}, 3600)">Start 60 Min</button>`;
+            document.getElementById(button3).outerHTML = `<button id="${button3}" onclick="control(${bay}, 0)">End Time</button>`;
+            document.getElementById(button4).outerHTML = `<button id="${button4}" onclick="secondMenu(${bay}, '${button1}', '${button2}', '${button3}', '${button4}')">More</button>`;
+        };
+
+        const secondMenu = (bay, button1, button2, button3, button4) => {
+
+            document.getElementById(button1).outerHTML = `<button id="${button1}" onclick="control(${bay}, +prompt('Enter custom time in minutes') * 60)">Edit Time</button>`;
+            document.getElementById(button2).outerHTML = `<button id="${button2}" onclick="">Manual Power</button>`;
+            document.getElementById(button3).outerHTML = `<button id="${button3}" onclick="">Update Device State</button>`;
+            document.getElementById(button4).outerHTML = `<button id="${button4}" onclick="firstMenu(${bay}, '${button1}', '${button2}', '${button3}', '${button4}')">Back</button>`;
+        };
+
+        let time_original = [0, 0, 0, 0];
+        let time = [0, 0, 0, 0];
+
+        const control = (bay, set_time) => {
+
+            time_original[bay - 1] = set_time + 1;
+            time[bay - 1] = set_time + 1;
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "/control");
+            xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+            const body = JSON.stringify({
+                bay: bay + 1,
+                time: set_time + 1,
+            });
+            xhr.onload = () => {
+                if (xhr.readyState != 4 && xhr.status != 201) {
+                    console.log(`Error: ${xhr.status}`);
+                }
+            };
+            xhr.send(body);
+        };
+
+        const updateStatus = () => {
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "/status");
+            xhr.setRequestHeader("Content-Type", "text/plain; charset=UTF-8");
+            const body = "Status requested";
+            xhr.onload = () => {
+                if (xhr.readyState == 4 && xhr.status == 201) {
+                    const response = JSON.parse(xhr.responseText);
+
+                    for (let i = 0; i < response.time.set_time; i++) {
+                        time_original[i] = response.time_original[i];
+                        time[i] = response.time[i];
+                    }
+
+                } else {
+                    console.log(`Error: ${xhr.status}`);
+                }
+            };
+            xhr.send(body);
+        };
+
+        updateStatus();
+        let timeout = 600;
+
+        const countdownTimer = setInterval(() => {
+            document.getElementById("time1").innerHTML = (time[0]-- > 0 ? Math.floor(time[0] / 60) + ":" + (Math.round(time[0] % 60) >= 10 ? Math.round(time[0] % 60) : "0" + Math.round(time[0] % 60)) : "Time Over");
+            document.getElementById("timer1").style.background = "linear-gradient(rgb(122, 142, 147), rgb(122, 142, 147)) content-box no-repeat, conic-gradient(transparent " + (time_original[0] != 0 ? ((1 - (time[0] / time_original[0])) * 100) : 100) + "%, 0, green) border-box";
+
+            document.getElementById("time2").innerHTML = (time[1]-- > 0 ? Math.floor(time[1] / 60) + ":" + (Math.round(time[1] % 60) >= 10 ? Math.round(time[1] % 60) : "0" + Math.round(time[1] % 60)) : "Time Over");
+            document.getElementById("timer2").style.background = "linear-gradient(rgb(122, 142, 147), rgb(122, 142, 147)) content-box no-repeat, conic-gradient(transparent " + (time_original[1] != 0 ? ((1 - (time[1] / time_original[1])) * 100) : 100) + "%, 0, green) border-box";
+
+            document.getElementById("time3").innerHTML = (time[2]-- > 0 ? Math.floor(time[2] / 60) + ":" + (Math.round(time[2] % 60) >= 10 ? Math.round(time[2] % 60) : "0" + Math.round(time[2] % 60)) : "Time Over");
+            document.getElementById("timer3").style.background = "linear-gradient(rgb(122, 142, 147), rgb(122, 142, 147)) content-box no-repeat, conic-gradient(transparent " + (time_original[2] != 0 ? ((1 - (time[2] / time_original[2])) * 100) : 100) + "%, 0, green) border-box";
+
+            document.getElementById("time4").innerHTML = (time[3]-- > 0 ? Math.floor(time[3] / 60) + ":" + (Math.round(time[3] % 60) >= 10 ? Math.round(time[3] % 60) : "0" + Math.round(time[3] % 60)) : "Time Over");
+            document.getElementById("timer4").style.background = "linear-gradient(rgb(122, 142, 147), rgb(122, 142, 147)) content-box no-repeat, conic-gradient(transparent " + (time_original[3] != 0 ? ((1 - (time[3] / time_original[3])) * 100) : 100) + "%, 0, green) border-box";
+
+            timeout--;
+            if (timeout == 0) {
+                updateStatus();
+                timeout = 600;
+            }
+
+        }, 1000);
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Configuration</title>
+</head>
+
+<body>
+
+    <h1>Configuration</h1>
+
+    <h2>Wifi Network</h2>
+    <p id="ssid">SSID: Loading...</p>
+    <button id="wifibutton" onclick="sendData()">Change wifi network</button>
+
+    <script>
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "/wifi");
+        xhr.setRequestHeader("Content-Type", "text/plain; charset=UTF-8");
+        const body = "Data requested";
+        xhr.onload = () => {
+            if (xhr.readyState == 4 && xhr.status == 201) {
+                const response = JSON.parse(xhr.responseText);
+                ssid = response.ssid;
+                document.getElementById("ssid").innerHTML = "SSID: " + ssid;
+            } else {
+                console.log(`Error: ${xhr.status}`);
+            }
+        };
+        xhr.send(body);  
+
+        const sendData = () => {
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "/changewifi");
+            xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+            const body = JSON.stringify({
+                ssid: prompt("Enter SSID"),
+                password: prompt("Enter password"),
+            });
+            xhr.onload = () => {
+                if (xhr.readyState != 4 && xhr.status != 201) {
+                    console.log(`Error: ${xhr.status}`);
+                }
+            };
+            xhr.send(body);
+
+            location.reload();
+        };
+    </script>
+
+</body>
+
+</html>
