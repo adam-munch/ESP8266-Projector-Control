@@ -2,13 +2,14 @@
 
 #define DEVICE_NAME "sim1"
 
-#define IR_RECEIVER_PIN 21
-#define IR_TRANSMITTER_PIN 22
+#define IR_RECEIVER_PIN 13
+#define IR_TRANSMITTER_PIN 14
 
 // STA Connection Info
 const char* wifi_ssid = "ssid";
 const char* wifi_password = "password";
 
+// Change Wifi
 JsonDocument wifi_data;
 JsonDocument wifiJSON() {
     wifi_data["ssid"] = wifi_ssid;

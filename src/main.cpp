@@ -13,8 +13,7 @@ void setup()
     initServer();
     timer();
 
-    IrReceiver.begin(IR_RECEIVER_PIN, ENABLE_LED_FEEDBACK);
-    IrSender.begin(IR_TRANSMITTER_PIN);
+    IRinit();
 }
 
 void loop()
@@ -22,5 +21,5 @@ void loop()
     server.handleClient();
     manageWifi();
 
-    
+    IRtransmit();
 }
