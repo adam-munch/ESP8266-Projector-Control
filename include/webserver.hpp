@@ -32,6 +32,10 @@ void serverRouting()
             if (doc["bay"] == i + 1) {
                 clock_time_original[i] = doc["time"];
                 clock_time[i] = doc["time"];
+                
+                if (power[i] != doc["power"]) {
+                    IRmanager(i);
+                }
             }
         }
 

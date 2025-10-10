@@ -6,10 +6,9 @@
 #define IR_TRANSMITTER_PIN 14
 
 // STA Connection Info
-const char* wifi_ssid = "ssid";
-const char* wifi_password = "password";
+const char* wifi_ssid = "";
+const char* wifi_password = "";
 
-// Change Wifi
 JsonDocument wifi_data;
 JsonDocument wifiJSON() {
     wifi_data["ssid"] = wifi_ssid;

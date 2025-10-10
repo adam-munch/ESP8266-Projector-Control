@@ -129,9 +129,9 @@
         </div>
 
         <div class="buttonbox">
-            <button id="button11" onclick="control(1, 1800)">Start 30 Min</button>
-            <button id="button12" onclick="control(1, 3600)">Start 60 Min</button>
-            <button id="button13" onclick="control(1, 0)">End Time</button>
+            <button id="button11" onclick="control(1, 1801, 1)">Start 30 Min</button>
+            <button id="button12" onclick="control(1, 3601, 1)">Start 60 Min</button>
+            <button id="button13" onclick="control(1, 0, 0)">End Time</button>
             <button id="button14" onclick="secondMenu(1, 'button11', 'button12', 'button13', 'button14')">More</button>
         </div>
     </div>
@@ -144,9 +144,9 @@
         </div>
 
         <div class="buttonbox">
-            <button id="button21" onclick="control(2, 1800)">Start 30 Min</button>
-            <button id="button22" onclick="control(2, 3600)">Start 60 Min</button>
-            <button id="button23" onclick="control(2, 0)">End Time</button>
+            <button id="button21" onclick="control(2, 1801, 1)">Start 30 Min</button>
+            <button id="button22" onclick="control(2, 3601, 1)">Start 60 Min</button>
+            <button id="button23" onclick="control(2, 0, 0)">End Time</button>
             <button id="button24" onclick="secondMenu(2, 'button21', 'button22', 'button23', 'button24')">More</button>
         </div>
     </div>
@@ -159,9 +159,9 @@
         </div>
 
         <div class="buttonbox">
-            <button id="button31" onclick="control(3, 1800)">Start 30 Min</button>
-            <button id="button32" onclick="control(3, 3600)">Start 60 Min</button>
-            <button id="button33" onclick="control(3, 0)">End Time</button>
+            <button id="button31" onclick="control(3, 1801, 1)">Start 30 Min</button>
+            <button id="button32" onclick="control(3, 3601, 1)">Start 60 Min</button>
+            <button id="button33" onclick="control(3, 0, 0)">End Time</button>
             <button id="button34" onclick="secondMenu(3, 'button31', 'button32', 'button33', 'button34')">More</button>
         </div>
     </div>
@@ -174,9 +174,9 @@
         </div>
 
         <div class="buttonbox">
-            <button id="button41" onclick="control(4, 1800)">Start 30 Min</button>
-            <button id="button42" onclick="control(4, 3600)">Start 60 Min</button>
-            <button id="button43" onclick="control(4, 0)">End Time</button>
+            <button id="button41" onclick="control(4, 1801, 1)">Start 30 Min</button>
+            <button id="button42" onclick="control(4, 3601, 1)">Start 60 Min</button>
+            <button id="button43" onclick="control(4, 0, 0)">End Time</button>
             <button id="button44" onclick="secondMenu(4, 'button41', 'button42', 'button43', 'button44')">More</button>
         </div>
     </div>
@@ -185,34 +185,37 @@
 
         const firstMenu = (bay, button1, button2, button3, button4) => {
 
-            document.getElementById(button1).outerHTML = `<button id="${button1}" onclick="control(${bay}, 1800)">Start 30 Min</button>`;
-            document.getElementById(button2).outerHTML = `<button id="${button2}" onclick="control(${bay}, 3600)">Start 60 Min</button>`;
-            document.getElementById(button3).outerHTML = `<button id="${button3}" onclick="control(${bay}, 0)">End Time</button>`;
+            document.getElementById(button1).outerHTML = `<button id="${button1}" onclick="control(${bay}, 1801, 1)">Start 30 Min</button>`;
+            document.getElementById(button2).outerHTML = `<button id="${button2}" onclick="control(${bay}, 3601, 1)">Start 60 Min</button>`;
+            document.getElementById(button3).outerHTML = `<button id="${button3}" onclick="control(${bay}, 0, 0)">End Time</button>`;
             document.getElementById(button4).outerHTML = `<button id="${button4}" onclick="secondMenu(${bay}, '${button1}', '${button2}', '${button3}', '${button4}')">More</button>`;
         };
 
         const secondMenu = (bay, button1, button2, button3, button4) => {
 
-            document.getElementById(button1).outerHTML = `<button id="${button1}" onclick="control(${bay}, +prompt('Enter custom time in minutes') * 60)">Edit Time</button>`;
-            document.getElementById(button2).outerHTML = `<button id="${button2}" onclick="">Manual Power</button>`;
-            document.getElementById(button3).outerHTML = `<button id="${button3}" onclick="">Update Device State</button>`;
+            document.getElementById(button1).outerHTML = `<button id="${button1}" onclick="control(${bay}, (+prompt('Enter custom time in minutes') * 60) + 1, 1)">Edit Time</button>`;
+            document.getElementById(button2).outerHTML = `<button id="${button2}" onclick="control(${bay}, time[${bay} - 1], !power[${bay} - 1])">Manual Power</button>`;
+            document.getElementById(button3).outerHTML = `<button id="${button3}" onclick="power[${bay} - 1] = !power[${bay} - 1]">Update Device State</button>`;
             document.getElementById(button4).outerHTML = `<button id="${button4}" onclick="firstMenu(${bay}, '${button1}', '${button2}', '${button3}', '${button4}')">Back</button>`;
         };
 
         let time_original = [0, 0, 0, 0];
         let time = [0, 0, 0, 0];
+        let power = [0, 0, 0, 0];
 
-        const control = (bay, set_time) => {
+        const control = (bay, set_time, set_power) => {
 
-            time_original[bay - 1] = set_time + 1;
-            time[bay - 1] = set_time + 1;
+            time_original[bay - 1] = set_time;
+            time[bay - 1] = set_time;
+            power[bay - 1] = set_power;
 
             const xhr = new XMLHttpRequest();
             xhr.open("POST", "/control");
             xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
             const body = JSON.stringify({
-                bay: bay + 1,
-                time: set_time + 1,
+                bay: bay,
+                time: set_time,
+                power: set_power,
             });
             xhr.onload = () => {
                 if (xhr.readyState != 4 && xhr.status != 201) {
@@ -232,7 +235,7 @@
                 if (xhr.readyState == 4 && xhr.status == 201) {
                     const response = JSON.parse(xhr.responseText);
 
-                    for (let i = 0; i < response.time.set_time; i++) {
+                    for (let i = 0; i < response.time.length; i++) {
                         time_original[i] = response.time_original[i];
                         time[i] = response.time[i];
                     }
@@ -243,10 +246,9 @@
             };
             xhr.send(body);
         };
-
         updateStatus();
-        let timeout = 600;
 
+        let timeout = 600;
         const countdownTimer = setInterval(() => {
             document.getElementById("time1").innerHTML = (time[0]-- > 0 ? Math.floor(time[0] / 60) + ":" + (Math.round(time[0] % 60) >= 10 ? Math.round(time[0] % 60) : "0" + Math.round(time[0] % 60)) : "Time Over");
             document.getElementById("timer1").style.background = "linear-gradient(rgb(122, 142, 147), rgb(122, 142, 147)) content-box no-repeat, conic-gradient(transparent " + (time_original[0] != 0 ? ((1 - (time[0] / time_original[0])) * 100) : 100) + "%, 0, green) border-box";

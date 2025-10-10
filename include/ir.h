@@ -3,7 +3,7 @@
 void IRinit()
 {
     IrReceiver.begin(IR_RECEIVER_PIN, ENABLE_LED_FEEDBACK);
-    IrSender.begin(IR_TRANSMITTER_PIN);
+    IrSender.begin(IR_TRANSMITTER_PIN); 
 }
 
 void IRreceive()
@@ -19,7 +19,24 @@ void IRreceive()
 
 void IRtransmit()
 {
-    IrSender.sendPanasonic(0x91C0, 0x9E10, 1);
+    IrSender.sendSamsung(0x7, 0x2, 1);
     Serial.println("IR sent");
-    delay(1000);
+}
+
+void IRmanager()
+{
+    for (int i = 0; i <= 3; i++)
+    {
+        if ((clock_time[i] == 0) and power[i] and (clock_time_original != 0))
+        {
+            IRtransmit();
+            power[i] = false;
+        }
+    }
+}
+
+void IRmanager(int bay)
+{
+    IRtransmit();
+    power[bay] = !power[bay];
 }

@@ -7,19 +7,15 @@ void setup()
 {
     Serial.begin(115200);
     Serial.println("");
-
     connectWiFi_STA();
     startMDNS();
     initServer();
     timer();
-
-    IRinit();
 }
 
 void loop()
 {
     server.handleClient();
     manageWifi();
-
-    IRtransmit();
+    IRmanager();
 }

@@ -4,7 +4,7 @@ JsonDocument status;
 
 int clock_time_original[4] = {0, 0, 0, 0};
 int clock_time[4] = {0, 0, 0, 0};
-bool power[4] = {true, true, true, true};
+bool power[4] = {false, false, false, false};
 
 Ticker ticker;
 

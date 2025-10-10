@@ -16,7 +16,7 @@ void connectWiFi_AP()
     Serial.print("IP address for network ");
     Serial.print(ap_ssid);
     Serial.print(" : ");
-    Serial.print(WiFi.softAPIP());
+    Serial.println(WiFi.softAPIP());
 }
 
 void connectWiFi_STA()
@@ -55,7 +55,7 @@ void startMDNS()
 {
     if (MDNS.begin(DEVICE_NAME))
     {
-        Serial.println("\nmDNS responder started");
+        Serial.println("mDNS responder started");
     }
 }
 
